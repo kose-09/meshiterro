@@ -10,11 +10,11 @@ class PostImagesController < ApplicationController
       redirect_to post_images_path
     else
       render :new
-    end 
+    end
   end
 
   def index
-    @post_images = PostImage.all
+    @post_images = PostImage.page(params[:page])
   end
 
   def show
