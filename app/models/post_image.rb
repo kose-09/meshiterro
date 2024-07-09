@@ -10,6 +10,12 @@ class PostImage < ApplicationRecord
 
   validates :shop_name, presence: true
   validates :image, presence: true
+  
+  after_create do
+    user.followers.each do |follower|
+      notifications.create(user_id: follower.id)
+    end 
+  end
 
   def get_image
     unless image.attached?
