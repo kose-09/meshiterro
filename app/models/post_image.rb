@@ -15,11 +15,7 @@ class PostImage < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
   
-  after_create do
-    user.followers.each do |follower|
-      notifications.create(user_id: follower.id)
-    end 
-  end
+  
 
   def get_image
     unless image.attached?
